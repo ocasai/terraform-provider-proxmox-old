@@ -721,6 +721,11 @@ func resourceVmQemuUpdate(d *schema.ResourceData, meta interface{}) error {
 
 	d.Partial(true)
 	if d.HasChange("target_node") {
+		_, err := client.StopVm(vmr)
+		if err != nil {
+			pmParallelEnd(pconf)
+			return err
+		}
 		_, err := client.MigrateNode(vmr, d.Get("target_node").(string), true)
 		if err != nil {
 			pmParallelEnd(pconf)
