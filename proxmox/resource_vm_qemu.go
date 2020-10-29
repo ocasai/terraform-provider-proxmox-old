@@ -726,7 +726,7 @@ func resourceVmQemuUpdate(d *schema.ResourceData, meta interface{}) error {
 			pmParallelEnd(pconf)
 			return err
 		}
-		_, err := client.MigrateNode(vmr, d.Get("target_node").(string), true)
+		_, err = client.MigrateNode(vmr, d.Get("target_node").(string), true)
 		if err != nil {
 			pmParallelEnd(pconf)
 			return err
